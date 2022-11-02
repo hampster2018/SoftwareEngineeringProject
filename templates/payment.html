@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+</head>
+<body>
+    <div>
+        <h1>Payment</h1>
+    </div>
+
+    <h2>Name: {{ name }}</h2>
+    <h2>Amount Owed: {{ total  }}</h3>
+    
+    <div>
+        <div>
+            <h3>Fees</h3>
+            <h3>Source</h3>
+        </div>
+        <div>
+            <ul>
+                {% for fee in fees: %}
+                <li>
+                    <div>
+                        <h3>{{ fee }}</h3>
+                        <h3>{{ source }}</h3>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div>
+        <button type="button">ezPay</button>
+        <button type="button">Credit Card</button>
+    </div>
+    <button type="button">Dispute</button>
+</body>
+</html>

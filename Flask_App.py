@@ -11,6 +11,10 @@ def home():
 def user(name):
     return f"Hello {name}!"
 
+@app.route("/Payment"):
+def payment():
+    return render_template('payment.html', name="Eric Shields")
+
 
 if __name__ == "__main__":
     app.run()
