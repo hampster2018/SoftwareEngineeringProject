@@ -11,7 +11,7 @@ def home():
 def payment():
     fees = [(49, "chicken"), (31, "soup"), (100, "Awesome")]
     total = sum(row[0] for row in fees)
-    return render_template('payment.html', name="Eric Shields", fees=fees)
+    return render_template('payment.html', name="Eric Shields", fees=fees, total=total)
 
 
 if __name__ == "__main__":
