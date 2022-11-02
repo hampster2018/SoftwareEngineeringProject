@@ -7,13 +7,11 @@ app = Flask(__name__)
 def home():
     return render_template('index.html', utc_dt=datetime.datetime.utcnow())
 
-@app.route("/<name>")
-def user(name):
-    return f"Hello {name}!"
-
-@app.route("/Payment"):
+@app.route("/Payment")
 def payment():
-    return render_template('payment.html', name="Eric Shields")
+    fees = [(49, "chicken"), (31, "soup"), (100, "Awesome")]
+    total = sum(row[0] for row in fees)
+    return render_template('payment.html', name="Eric Shields", fees=fees)
 
 
 if __name__ == "__main__":

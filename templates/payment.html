@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Payment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/payment.css') }}">
 </head>
 <body>
     <div>
@@ -19,7 +20,7 @@
         </div>
         <div>
             <ul>
-                {% for fee in fees: %}
+                {% for fee, source in fees: %}
                 <li>
                     <div>
                         <h3>{{ fee }}</h3>
