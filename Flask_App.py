@@ -1,5 +1,11 @@
 import datetime
 from flask import Flask, render_template
+import configparser
+
+config = configparser.ConfigParser()
+config.read('.env')
+API_Key = config['APIKey']['GOOGLE_MAP_KEY']
+print("https://maps.googleapis.com/maps/api/js?key=" + API_Key + "&callback=initMap&v=weekly")
 
 app = Flask(__name__)
 
@@ -12,6 +18,10 @@ def payment():
     fees = [(49, "chicken"), (31, "soup"), (100, "Awesome")]
     total = sum(row[0] for row in fees)
     return render_template('payment.html', name="Eric Shields", fees=fees, total=total)
+
+@app.route("/Map")
+def map():
+    return render_template('map.html', mapLink="https://maps.googleapis.com/maps/api/js?key=" + API_Key + "&callback=initMap&v=weekly")
 
 
 if __name__ == "__main__":
