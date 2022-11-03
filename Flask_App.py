@@ -5,7 +5,6 @@ import configparser
 config = configparser.ConfigParser()
 config.read('.env')
 API_Key = config['APIKey']['GOOGLE_MAP_KEY']
-print("https://maps.googleapis.com/maps/api/js?key=" + API_Key + "&callback=initMap&v=weekly")
 
 app = Flask(__name__)
 
