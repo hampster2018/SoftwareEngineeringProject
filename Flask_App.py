@@ -14,5 +14,6 @@ def payment():
     return render_template('payment.html', name="Eric Shields", fees=fees, total=total)
 
 
+
 if __name__ == "__main__":
     app.run()
