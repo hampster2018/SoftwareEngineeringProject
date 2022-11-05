@@ -22,6 +22,9 @@ def payment():
 def map():
     return render_template('map.html', mapLink="https://maps.googleapis.com/maps/api/js?key=" + API_Key + "&callback=initMap&v=weekly")
 
+@app.route("/Vehicle_Research")
+def vehicleResearch():
+    return render_template("vehicleResearch.html")
 
 if __name__ == "__main__":
     app.run()
