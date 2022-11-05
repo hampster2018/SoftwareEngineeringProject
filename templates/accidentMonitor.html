@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>EZTraffic Accident Monitor</title>
 </head>
-<body>
-    <h1 style="text-align:center; font-family: verdana;"> EZTraffic Accident Monitor</h1>
-
-    <canvas id = "chart" style = "margin-left: auto; margin-right: auto;max-height: 1000px; max-width: 1000px;"> </canvas>
-    <script>
+<body style = "background-color: lightblue">
+    <center>
+        <h1 class="title_border"> EZTraffic Accident Monitor</h1>
+    </center>
+    <canvas id = "chart" class="chart_border"> </canvas>
+    <script style ="padding: 1000px">
         var xValues = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        var yValues = [50, 75, 100, 60, 50, 50 ,50];
+        var yValues = [Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201)];
         var barColors = "blue"
 
         new Chart("chart",  {
@@ -40,6 +47,7 @@
                 scales: {
                     yAxes: [{
                         ticks: {
+                            max: 200,
                             beginAtZero: true
                         }
                     }]
@@ -47,5 +55,10 @@
             }
         });
     </script>
+    <center>
+        <label for="date" class="date_Label"> Select a date: </label>
+        <input name="date" class="date" type="date">
+        <input class="submit" type="submit">
+    </center>
 </body>
 </html>
