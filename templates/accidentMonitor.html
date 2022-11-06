@@ -22,7 +22,7 @@
                     Math.floor(Math.random() * 201)];
         var barColors = "blue"
 
-        new Chart("chart",  {
+        var chart = new Chart("chart",  {
             type: "bar",
             data: {
                 labels: xValues,
@@ -54,11 +54,21 @@
                 }
             }
         });
+    function updateChart() {
+        chart.data.datasets[0].data = [Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201)];
+        chart.update();
+    }
     </script>
     <center>
         <label for="date" class="date_Label"> Select a date: </label>
         <input name="date" class="date" type="date">
-        <input class="submit" type="submit">
+        <input class="submit" type="submit" onclick="updateChart()">
     </center>
 </body>
 </html>
