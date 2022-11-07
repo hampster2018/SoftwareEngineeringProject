@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>EZTraffic Accident Monitor</title>
+</head>
+<body style = "background-color: lightblue">
+    <center>
+        <h1 class="title_border"> EZTraffic Accident Monitor</h1>
+    </center>
+    <canvas id = "chart" class="chart_border"> </canvas>
+    <script style ="padding: 1000px">
+        var xValues = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var yValues = [Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201)];
+        var barColors = "blue"
+
+        var chart = new Chart("chart",  {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    label: "Number of accidents",
+                    backgroundColor: barColors,
+                    data: yValues,
+                }]
+            },
+            options: {
+                legend: {
+                    display: true,
+                    title: {
+                        text: "Values"
+                    },
+                    position: "bottom"
+                },
+                title: {
+                    display: true,
+                    text: "EZTraffic Accident Monitor"
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            max: 200,
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    function updateChart() {
+        chart.data.datasets[0].data = [Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201),
+                    Math.floor(Math.random() * 201)];
+        chart.update();
+    }
+    </script>
+    <center>
+        <label for="date" class="date_Label"> Select a date: </label>
+        <input name="date" class="date" type="date">
+        <input class="submit" type="submit" onclick="updateChart()">
+    </center>
+</body>
+</html>

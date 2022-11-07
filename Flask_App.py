@@ -8,9 +8,13 @@ API_Key = config['APIKey']['GOOGLE_MAP_KEY']
 
 app = Flask(__name__)
 
-@app.route("/")  
-def home():
-    return render_template('index.html', utc_dt=datetime.datetime.utcnow())
+#@app.route("/")  
+#def home():
+#    return render_template('index.html', utc_dt=datetime.datetime.utcnow())
+
+@app.route("/AccidentMonitor")
+def user():
+    return render_template('accidentMonitor.html')
 
 @app.route("/Payment")
 def payment():
