@@ -13,6 +13,9 @@ def payment():
     total = sum(row[0] for row in fees)
     return render_template('payment.html', name="Eric Shields", fees=fees, total=total)
 
+@app.route("/accountPreferences")
+def accountPreferences():
+    return render_template('accountPreferences.html')
 
 if __name__ == "__main__":
     app.run()
