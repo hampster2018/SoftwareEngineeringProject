@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>Add Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}" />
+    <script type="module" src="{{ url_for('static', filename='javascript/map.js') }}"></script>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map">
+      <script
+        src= {{ mapLink }}
+        defer
+      ></script>
+    </div>
+  </body>
+</html>
