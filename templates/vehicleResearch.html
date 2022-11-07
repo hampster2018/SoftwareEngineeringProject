@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicle Research</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vehicleResearch.css') }}">
+</head>
+<body>
+    <h1>Research a Vehicle by License Plate</h1>
+    <p>Enter a license plate to search for vehicle history records</p>
+    <form>
+       <input type="text" placeholder = "License Plate Number:"><br>
+       <input type="text" placeholder = "State: "><br>
+    </form>
+    <a href="https://www.progressive.com/answers/driving-without-license-plate/">Don't have a License Plate? CLICK HERE</a>
+    <br>
+    <a href="http://127.0.0.1:5000/License_Link"><button>Search</button></a>
+</body>
