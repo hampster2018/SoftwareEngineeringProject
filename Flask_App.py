@@ -18,6 +18,7 @@ def payment():
     total = sum(row[0] for row in fees)
     return render_template('payment.html', name="Eric Shields", fees=fees, total=total)
 
+
 @app.route("/Map")
 def map():
     return render_template('map.html', mapLink="https://maps.googleapis.com/maps/api/js?key=" + API_Key + "&callback=initMap&v=weekly")
@@ -37,5 +38,11 @@ def reportConditions():
 @app.route("/Submitted_Conditions")
 def submittedConditions():
     return render_template("submittedConditions.html")
+    
+@app.route("/reportAnIssue")
+def reportAnIssue():
+    return render_template('reportAnIssue.html')
+
+
 if __name__ == "__main__":
     app.run()
