@@ -27,6 +27,18 @@ def map():
 def vehicleResearch():
     return render_template("vehicleResearch.html")
 
+@app.route("/License_Link")
+def licenseLink():
+    return render_template("licenseLink.html")
+
+@app.route("/Report_Conditions")
+def reportConditions():
+    return render_template("reportConditions.html")
+
+@app.route("/Submitted_Conditions")
+def submittedConditions():
+    return render_template("submittedConditions.html")
+    
 @app.route("/reportAnIssue")
 def reportAnIssue():
     return render_template('reportAnIssue.html')
