@@ -58,6 +58,9 @@ def submittedConditions():
 def reportAnIssue():
     return render_template('reportAnIssue.html')
 
+@app.route("/")  
+def home():
+    return render_template('violationMonitor.html')
 
 if __name__ == "__main__":
     app.run()
