@@ -13,6 +13,9 @@ def payment():
     total = sum(row[0] for row in fees)
     return render_template('payment.html', name="Eric Shields", fees=fees, total=total)
 
+@app.route("/reportAnIssue")
+def reportAnIssue():
+    return render_template('reportAnIssue.html')
 
 if __name__ == "__main__":
     app.run()
