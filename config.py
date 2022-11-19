@@ -15,13 +15,6 @@ class Config:
     FLASK_DEBUG = environ.get("FLASK_DEBUG")
     SECRET_KEY = environ.get("SECRET_KEY")
 
-    # Flask-Session
-    SESSION_TYPE = "mongoDB"
-    SESSION_MONGODB = flask_pymongo.MongoClient()
-    SESSION_MONGODB_DB = environ.get("MONGO_DB")
-    SESSION_MONGODB_COLLECT = environ.get("MONGO_COLLECT")
-
-
     # Flask-Assets
     LESS_BIN = environ.get("LESS_BIN")
     ASSETS_DEBUG = False

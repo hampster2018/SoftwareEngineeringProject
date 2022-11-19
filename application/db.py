@@ -28,7 +28,7 @@ def Signup(email):
     return list(db.Users.find({"firstName": email}))
 
 def MakeUser(user):
-    return db.Users.insert(user)
+    return db.Users.insert_one(user)
 
 def CheckAuth(email):
     return list(db.Users.find({"email": email}))
