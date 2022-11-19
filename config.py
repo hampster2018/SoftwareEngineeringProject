@@ -31,3 +31,6 @@ class Config:
     STATIC_FOLDER = "static"
     TEMPLATES_FOLDER = "templates"
     COMPRESSOR_DEBUG = True
+
+    MONGO_URI = environ.get("MONGO_URI")
+    GOOGLE_MAP_KEY=environ.get("GOOGLE_MAP_KEY")

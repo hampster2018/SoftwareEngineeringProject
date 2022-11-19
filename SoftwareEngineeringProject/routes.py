@@ -30,7 +30,7 @@ def report_incidents():
 
 @main_bp.route("/Map")
 def map():
-    return render_template('map.html', mapLink="https://maps.googleapis.com/maps/api/js?key=" + app.config['GOOGLE_MAP_KEY'] + "&callback=initMap&v=weekly")
+    return render_template('map.html', mapLink="https://maps.googleapis.com/maps/api/js?key=" + app.config.GOOGLE_MAP_KEY + "&callback=initMap&v=weekly")
 
 @main_bp.route("/Vehicle_Research")
 def vehicleResearch():
