@@ -12,3 +12,9 @@ def GetByEmail(email):
 
 def GetUserById(id):
     return mongo.db.Users.find_one({"_id": id})
+
+def GetTolls():
+    return mongo.db.Tolls.find({})
+
+def UpdateTollByName(name, amount):
+    return mongo.db.Tolls.find_one_and_update({'name': name}, {'amount': amount})
