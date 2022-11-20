@@ -15,10 +15,16 @@ def home():
 @main_bp.route("/session")
 @login_required
 def session_view():
-    return render_template("accident_monitor.html")
+    return render_template("accidentMonitor.html")
 
 @main_bp.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect(url_for("auth_bp.login"))
+
+@main_bp.route("/tollFeeAdmin")
+def toll_fees():
+    tolls = [("Wilson Road", "Exit Ramp", "$0.75"), ("MLK Road", "Exit Ramp", "$0.55"), ("Arapaho Road", "Exit Ramp", "$1.20")]
+    return render_template("tollFees.html")
+
