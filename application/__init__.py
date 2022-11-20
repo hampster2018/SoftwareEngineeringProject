@@ -1,10 +1,11 @@
 from flask import Flask
-from werkzeug.local import LocalProxy
 from flask_login import LoginManager
 from flask_pymongo import PyMongo
+from flask_session import Session
 
 mongo = PyMongo()
 login_manager = LoginManager()
+sesh = Session()
 
 def init_app():
     app = Flask(__name__, instance_relative_config=False)
@@ -13,11 +14,13 @@ def init_app():
 
     mongo.init_app(app)
     login_manager.init_app(app)
+    sesh.init_app(app)
 
     with app.app_context():
 
         from . import routes
         from . import auth
+        from . import models
         from . import db
         
         app.register_blueprint(routes.main_bp)

@@ -2,13 +2,13 @@
 from flask import Blueprint
 from flask import current_app as app
 from flask import flash, redirect, render_template, request, url_for
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, confirm_login
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from . import login_manager
+from . import login_manager, mongo, sesh
 from .forms import LoginForm, SignupForm
 from .db import Signup, MakeUser, CheckAuth, GetUserById
-
+from .models import User
 
 # Blueprint Configuration
 auth_bp = Blueprint(
@@ -28,17 +28,13 @@ def signup():
     form = SignupForm()
     if form.validate_on_submit():
         existing_user = Signup(form.email.data)
-        if existing_user is None:
-            user = {
-                "firstName": form.firstName.data,
-                "lastName": form.lastName.data,
-                "email": form.email.data,
-                "password": generate_password_hash(form.password.data, method="sha256")
-            }
-            MakeUser(user)
-            login_user(user)  # Log in as newly created user
+        print("Existing Users:", existing_user)
+        if len(existing_user) == 0:
+            user = User(name = form.name.data, email = form.email.data, password = generate_password_hash(form.password.data, method="sha256"))
             print(user)
-            return redirect(url_for("main_bp.dashboard"))
+            MakeUser({'name': user.name, 'email': user.email, 'password': user.password})
+            print("The login succeded: ", login_user(user))  # Log in as newly created user
+            return redirect(url_for("main_bp.home"))
         flash("A user already exists with that email address.")
     return render_template(
         "signup.jinja2",
@@ -57,16 +53,16 @@ def login():
     POST: Validate form and redirect user to dashboard.
     """
     if current_user.is_authenticated:
-        return redirect(url_for("main_bp.dashboard"))  # Bypass if user is logged in
+        return redirect(url_for("main_bp.home"))  # Bypass if user is logged in
 
     form = LoginForm()
     if form.validate_on_submit():
         email = form.email.data
         user = CheckAuth(email)
-        if check_password_hash(generate_password_hash(pwhash=form.password.data, password=user['password'])):
-            login_user(user)
-            next_page = request.args.get("next")
-            return redirect(next_page or url_for("main_bp.dashboard"))
+        if check_password_hash(pwhash=user['password'], password=form.password.data):
+            user = User(_id=user['_id'], name=user['name'], email=user['email'], password=user['password'])
+            login_user(user, force=True)
+            return redirect(url_for("main_bp.home"))
         flash("Invalid username/password combination")
         return redirect(url_for("auth_bp.login"))
     return render_template(
@@ -80,9 +76,14 @@ def login():
 
 @login_manager.user_loader
 def load_user(user_id):
-    """Check if user is logged-in upon page load."""
     if user_id is not None:
-        return GetUserById(user_id)
+        print("The user id is: ", user_id)
+        user = GetUserById(user_id)
+        print("The user is", user)
+        if user is not None:
+            userObject = User(str(user['_id']))
+            print(userObject)
+            return userObject
     return None
 
 
