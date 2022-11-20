@@ -3,6 +3,8 @@ from flask import current_app as app
 from flask import render_template, redirect, url_for
 from flask_login import login_required, logout_user, current_user
 
+from .db import GetTolls
+
 main_bp = Blueprint(
     "main_bp", __name__, template_folder="templates", static_folder="static"
 )
@@ -25,6 +27,7 @@ def logout():
 
 @main_bp.route("/tollFeeAdmin")
 def toll_fees():
-    tolls = [("Wilson Road", "Exit Ramp", "$0.75"), ("MLK Road", "Exit Ramp", "$0.55"), ("Arapaho Road", "Exit Ramp", "$1.20")]
-    return render_template("tollFees.html")
+    tolls = GetTolls()
+    print(tolls)
+    return render_template("tollFees.html", tolls=tolls)
 

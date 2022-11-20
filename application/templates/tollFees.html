@@ -12,21 +12,13 @@
               <th>Type</th>
               <th>Fee</th>
             </tr>
+            {% for toll in tolls %}
             <tr>
-              <td>Wilson Road</td>
-              <td>Exit Ramp</td>
-              <td>$0.75</td>
+              <td>{{toll['name']}}</td>
+              <td>{{toll['type']}}</td>
+              <td>${{toll['amount']}}</td>
             </tr>
-            <tr>
-              <td>MLK Road</td>
-              <td>Exit Ramp</td>
-              <td>$0.55</td>
-            </tr>
-            <tr>
-                <td>Arapaho Road</td>
-                <td>Exit Ramp</td>
-                <td>$1.25</td>
-              </tr>
+            {% endfor %}
           </table>
         </center>
     </body>
