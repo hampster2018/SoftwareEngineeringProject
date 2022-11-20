@@ -1,15 +1,15 @@
 from flask import Blueprint
 from flask import current_app as app
 from flask import render_template, redirect, url_for
-from flask_login import login_required, logout_user
+from flask_login import login_required, logout_user, current_user
 
 main_bp = Blueprint(
     "main_bp", __name__, template_folder="templates", static_folder="static"
 )
 
 @main_bp.route("/")
-@login_required
 def home():
+        print(current_user)
         return render_template("licenseLink.html")
 
 @main_bp.route("/session")

@@ -14,6 +14,7 @@ class Config:
     FLASK_APP = environ.get("FLASK_APP")
     FLASK_DEBUG = environ.get("FLASK_DEBUG")
     SECRET_KEY = environ.get("SECRET_KEY")
+    SESSION_TYPE = "filesystem"
 
     # Flask-Assets
     LESS_BIN = environ.get("LESS_BIN")
