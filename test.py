@@ -16,10 +16,12 @@ class FlaskTestCase(unittest.TestCase):
         self.assertTrue(b'Log in' in response.data)
 
     # Ensures login behaves correctly given that the username and password are correct
-    def test_successful_login(self):
+    def test_invalid_email(self):
         tester = app.test_client(self)
-        response = tester.post('/login', data=dict(username="admin", password="admin"), follow_redirects=True)
-        self.assertEqual(response.status_code, 200)
+        tester.post('/signup', data=dict(name="John Smith", username="admin", password="123456", confirmPassword="123456"), follow_redirects=True)
+        response = tester.get('/signup', content_type='text/javascript')
+        print(response.data)
+        self.assertTrue(b'Invalid email' in response.data)
         #self.assertTrue(b'You were logged in' in response.data)
     
     # Ensures login behaves correctly given that the username and password are wrong
@@ -27,6 +29,10 @@ class FlaskTestCase(unittest.TestCase):
         tester = app.test_client(self)
         response = tester.post('/login', data=dict(username="wrong", password="admin"), follow_redirects=True)
         self.assertTrue(b'Log in' in response.data)
+
+
+    # Ensures sign-up successfully creates account
+    # Ensures sign-up 
     
 if __name__ == '__main__':
     unittest.main()
