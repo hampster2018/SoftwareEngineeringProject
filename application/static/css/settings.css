@@ -1,0 +1,22 @@
+.button {
+    background-color: #cfcfcf;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    
+}
+
+.triangle-left {
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-right: 50px solid #cfcfcf;
+    border-bottom: 25px solid transparent;
+    cursor: pointer;
+
+}
