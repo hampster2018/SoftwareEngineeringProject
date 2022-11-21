@@ -10,12 +10,12 @@ main_bp = Blueprint(
 @main_bp.route("/")
 def home():
         print(current_user)
-        return render_template("licenseLink.html")
+        return render_template("login.html")
 
 @main_bp.route("/session")
 @login_required
 def session_view():
-    return render_template("accident_monitor.html")
+    return render_template("accidentMonitor.html")
 
 @main_bp.route("/logout")
 @login_required
