@@ -14,7 +14,8 @@ def GetUserById(id):
     return mongo.db.Users.find_one({"_id": id})
 
 def GetTolls():
-    print("I'm here")
+    toll = list(mongo.db.Tolls.find({}))
+    print(toll)
     return list(mongo.db.Tolls.find({}))
 
 def UpdateTollByName(name, amount):
