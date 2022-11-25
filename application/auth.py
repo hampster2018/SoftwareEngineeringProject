@@ -10,6 +10,8 @@ from .forms import LoginForm, SignupForm
 from .db import Signup, MakeUser, GetByEmail, GetUserById
 from .models import User
 
+from . import db
+
 # Blueprint Configuration
 auth_bp = Blueprint(
     'auth_bp', __name__,
