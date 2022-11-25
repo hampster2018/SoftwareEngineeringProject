@@ -4,7 +4,6 @@ from flask import render_template, redirect, url_for
 from flask_login import login_required, logout_user, current_user
 
 from . import db
-from .db import GetTolls
 
 main_bp = Blueprint(
     "main_bp", __name__, template_folder="templates", static_folder="static"
@@ -67,7 +66,7 @@ def transportation():
 @main_bp.route("/Settings")
 def settings():
     return render_template("settings.html")
-=======
+
 @main_bp.route("/TollFeeAdmin")
 def toll_fees():
     tolls = GetTolls()

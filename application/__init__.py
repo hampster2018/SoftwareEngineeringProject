@@ -3,6 +3,7 @@ from flask_login import LoginManager
 from flask_pymongo import PyMongo
 from flask_session import Session
 
+
 mongo = PyMongo()
 login_manager = LoginManager()
 sesh = Session()
