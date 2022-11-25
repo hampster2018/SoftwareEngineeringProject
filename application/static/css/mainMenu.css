@@ -1,0 +1,51 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(243, 243, 243);
+}
+
+.borderexample{
+    margin: auto;
+    width: 400px; 
+    padding: 30px;
+    
+    border-width: 2px;
+    border-style: solid;
+    border-color: gray;
+    background-color: rgba(255, 255, 255, 0.877);    
+}
+
+.center{text-align: center;}
+.italic{font-style: italic;}
+
+/*Remove link decoration*/
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:active { text-decoration: none; }
+
+/* For Links */
+.borderTop{border-top: 2px solid rgb(143, 143, 143);}
+
+.myLink{
+    color:black;
+}
+.myLink:hover{color: red}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: white;
+  padding: 5px;
+  
+  margin: 100px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, .5);
+  border: 1.5px solid gray;
+  
+  padding: 35px;
+  
+  font-size: 30px;
+  text-align: center;
+}
