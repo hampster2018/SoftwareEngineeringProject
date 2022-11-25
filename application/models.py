@@ -3,14 +3,13 @@ from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 from pydantic.dataclasses import dataclass
 from uuid import uuid4
-from typing import Optional
 
 from . import db
 
 @dataclass
 class User(UserMixin):
 
-                    id: int
+    id: int
     name: str = "Default Name"
     email: str = "example@example.com"
     password: str = "..."

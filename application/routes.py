@@ -3,7 +3,7 @@ from flask import current_app as app
 from flask import render_template, redirect, url_for
 from flask_login import login_required, logout_user, current_user
 
-from . import db
+from .db import GetTolls
 
 main_bp = Blueprint(
     "main_bp", __name__, template_folder="templates", static_folder="static"
