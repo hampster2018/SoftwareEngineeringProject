@@ -21,6 +21,7 @@ def init_app():
         from . import routes
         from . import auth
         from . import models
+        from . import db
         
         app.register_blueprint(routes.main_bp)
         app.register_blueprint(auth.auth_bp)

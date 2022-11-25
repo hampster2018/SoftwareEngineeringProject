@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Toll Fees</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tollFees.css') }}">
+    </head>
+    <center>
+        <table style="width:70%; text-align: center;">
+            <tr>
+              <th>Location</th>
+              <th>Type</th>
+              <th>Fee</th>
+            </tr>
+            {% for toll in tolls %}
+            <tr>
+              <td>{{toll['name']}}</td>
+              <td>{{toll['type']}}</td>
+              <td>${{toll['amount']}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </center>
+    </body>
+</html>
