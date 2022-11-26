@@ -9,7 +9,7 @@ from . import db
 @dataclass
 class User(UserMixin):
 
-    id: int
+    _id: int
     name: str = "Default Name"
     email: str = "example@example.com"
     password: str = "..."
