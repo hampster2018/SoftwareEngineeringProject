@@ -3,6 +3,7 @@ from flask import current_app as app
 from flask import render_template, redirect, url_for
 from flask_login import login_required, logout_user, current_user
 
+from .roles import roles_required
 from .db import GetTolls
 
 main_bp = Blueprint(
@@ -70,6 +71,10 @@ def settings():
 @main_bp.route("/TollFeeAdmin")
 def toll_fees():
     tolls = GetTolls()
-    print(tolls)
     return render_template("tollFees.html", tolls=tolls)
+
+@main_bp.route("/test")
+@roles_required('Admin')
+def test():
+    return render_template("publicTransport.html")
 
