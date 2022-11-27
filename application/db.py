@@ -1,4 +1,7 @@
 from flask import current_app as app
+from flask_login import current_user
+
+from bson import ObjectId
 from . import mongo
 
 def Signup(email):
@@ -15,8 +18,10 @@ def GetUserById(id):
 
 def GetTolls():
     toll = list(mongo.db.Tolls.find({}))
-    print(toll)
     return list(mongo.db.Tolls.find({}))
 
 def UpdateTollByName(name, amount):
     return mongo.db.Tolls.find_one_and_update({'name': name}, {'amount': amount})
+
+def GetRoles():
+    return mongo.db.Users.find_one({'_id': ObjectId(current_user.get_id())})['roles']

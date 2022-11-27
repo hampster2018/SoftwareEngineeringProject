@@ -1,4 +1,5 @@
 """Database models."""
+import dataclasses
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 from pydantic.dataclasses import dataclass
@@ -13,10 +14,15 @@ class User(UserMixin):
     name: str = "Default Name"
     email: str = "example@example.com"
     password: str = "..."
+    roles: list[str] = dataclasses.field(default_factory=list)
 
     def get_id(self):
         object_id = self._id
         return object_id
+
+    def get_roles(self):
+        roles = self.roles
+        return roles
 
     def set_password(self, password):
         """Create hashed password."""

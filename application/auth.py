@@ -32,9 +32,9 @@ def signup():
         existing_user = Signup(form.email.data)
         print("Existing Users:", existing_user)
         if len(existing_user) == 0:
-            MakeUser({'name': form.name.data, 'email': form.email.data, 'password': generate_password_hash(form.password.data, method="sha256")})
+            MakeUser({'name': form.name.data, 'email': form.email.data, 'password': generate_password_hash(form.password.data, method="sha256"), 'roles': ["User"]})
             user = GetByEmail(form.email.data)
-            user = User(_id=user['_id'], name=user['name'], email=user['email'], password=user['password'])
+            user = User(_id=user['_id'], name=user['name'], email=user['email'], password=user['password'], roles=user['roles'])
             login_user(user, force=True)
             return redirect(url_for("main_bp.home"))
         flash("A user already exists with that email address.")
@@ -79,12 +79,9 @@ def login():
 @login_manager.user_loader
 def load_user(user_id):
     if user_id is not None:
-        print("The user id is: ", user_id)
         user = GetUserById(user_id)
-        print("The user is", user)
         if user is not None:
             userObject = User(str(user['_id']))
-            print(userObject)
             return userObject
     return None
 
