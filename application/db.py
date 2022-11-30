@@ -4,27 +4,29 @@ from flask_login import current_user
 from bson import ObjectId
 from . import mongo
 
-def Signup(email):
-    return list(mongo.db.Users.find({"email": email}))
-
-def MakeUser(user):
-    return mongo.db.Users.insert_one(user)
-
-def GetByEmail(email):
+"""
+    Set of functions to create and get User information
+"""
+## Returns a user or None by the email
+def GetUserByEmail(email):
     return mongo.db.Users.find_one({"email": email})
 
+## Returns a user or None by the id
 def GetUserById(id):
     return mongo.db.Users.find_one({"_id": id})
 
-def GetTolls():
-    return list(mongo.db.Tolls.find({}))
-
-def UpdateTollByName(name, amount):
-    return mongo.db.Tolls.find_one_and_update({'name': name}, {'amount': amount})
-
+## Returns the roles given to a user in Array form
 def GetRoles():
     return mongo.db.Users.find_one({'_id': ObjectId(current_user.get_id())})['roles']
 
+## Makes a user by passing in a user
+def MakeUser(user):
+    mongo.db.Users.insert_one(user)
+
+
+"""
+    Set of functions to get and make issues for users
+"""
 def GetIssues():
     return mongo.db.Issues.find_one({'_id': ObjectId(current_user.get_id())})
 
@@ -36,3 +38,13 @@ def MakeIssue(Issue):
         mongo.db.Issues.find_one_and_update({'_id': ObjectId(current_user.get_id())}, { '$set': {'Issues': [issues]}})
     else:
         mongo.db.Issues.insert_one({'_id': ObjectId(current_user.get_id()), 'Issues': [Issue]})
+        
+
+"""
+    Set of functions to get and update Tolls
+"""
+def GetTolls():
+    return list(mongo.db.Tolls.find({}))
+
+def SetTollByName(name, amount):
+    return mongo.db.Tolls.find_one_and_update({'name': name}, {'amount': amount})

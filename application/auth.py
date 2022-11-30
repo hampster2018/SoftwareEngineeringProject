@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from . import login_manager, mongo, sesh
 from .forms import LoginForm, SignupForm
-from .db import Signup, MakeUser, GetByEmail, GetUserById
+from .db import MakeUser, GetUserByEmail, GetUserById
 from .models import User
 
 from . import db
@@ -29,11 +29,11 @@ def signup():
     """
     form = SignupForm()
     if form.validate_on_submit():
-        existing_user = Signup(form.email.data)
+        existing_user = GetUserByEmail(form.email.data)
         print("Existing Users:", existing_user)
         if len(existing_user) == 0:
             MakeUser({'name': form.name.data, 'email': form.email.data, 'password': generate_password_hash(form.password.data, method="sha256"), 'roles': ["User"]})
-            user = GetByEmail(form.email.data)
+            user = GetUserByEmail(form.email.data)
             user = User(_id=user['_id'], name=user['name'], email=user['email'], password=user['password'], roles=user['roles'])
             login_user(user, force=True)
             return redirect(url_for("main_bp.home"))
@@ -60,7 +60,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         email = form.email.data
-        user = GetByEmail(email)
+        user = GetUserByEmail(email)
         if check_password_hash(pwhash=user['password'], password=form.password.data):
             user = User(_id=user['_id'], name=user['name'], email=user['email'], password=user['password'])
             login_user(user, force=True)
