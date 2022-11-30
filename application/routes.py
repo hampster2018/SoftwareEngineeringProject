@@ -4,7 +4,7 @@ from flask import render_template, redirect, url_for
 from flask_login import login_required, logout_user, current_user
 
 from .roles import roles_required
-from .db import GetTolls
+from .db import GetTolls, MakeIssue
 
 main_bp = Blueprint(
     "main_bp", __name__, template_folder="templates", static_folder="static"
@@ -74,7 +74,6 @@ def toll_fees():
     return render_template("tollFees.html", tolls=tolls)
 
 @main_bp.route("/test")
-@roles_required('Admin')
 def test():
+    MakeIssue(Issue=['Meep'])
     return render_template("publicTransport.html")
-

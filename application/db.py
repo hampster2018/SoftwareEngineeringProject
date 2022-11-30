@@ -24,3 +24,15 @@ def UpdateTollByName(name, amount):
 
 def GetRoles():
     return mongo.db.Users.find_one({'_id': ObjectId(current_user.get_id())})['roles']
+
+def GetIssues():
+    return mongo.db.Issues.find_one({'_id': ObjectId(current_user.get_id())})
+
+def MakeIssue(Issue):
+    user = GetIssues()
+    if user is not None:
+        issues = user['Issues']
+        issues.append(Issue)
+        mongo.db.Issues.find_one_and_update({'_id': ObjectId(current_user.get_id())}, { '$set': {'Issues': [issues]}})
+    else:
+        mongo.db.Issues.insert_one({'_id': ObjectId(current_user.get_id()), 'Issues': [Issue]})
