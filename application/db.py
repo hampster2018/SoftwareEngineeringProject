@@ -16,7 +16,7 @@ def GetById(id):
     return mongo.db.Users.find_one({"_id": id})
 
 def GetUserById():
-    return mongo.db.Users.find_one({"_id": current_user.get_id()})
+    return mongo.db.Users.find_one({"_id": ObjectId(current_user.get_id())})
 
 ## Returns the roles given to a user in Array form
 def GetRoles():

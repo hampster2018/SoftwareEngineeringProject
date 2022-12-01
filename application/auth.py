@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from . import login_manager, mongo, sesh
 from .forms import LoginForm, SignupForm
-from .db import MakeUser, GetUserByEmail, GetUserById
+from .db import MakeUser, GetUserByEmail, GetById
 from .models import User
 
 from . import db
@@ -84,7 +84,7 @@ def logout():
 @login_manager.user_loader
 def load_user(user_id):
     if user_id is not None:
-        user = GetUserById(user_id)
+        user = GetById(user_id)
         if user is not None:
             userObject = User(str(user['_id']))
             return userObject

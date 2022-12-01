@@ -22,7 +22,8 @@ def googleMaps():
 def accPreference():
     user = GetUserById()
     email = user['email']
-    return render_template("accountPreferences.html", email)
+    name = user['name']
+    return render_template("accountPreferences.html", email=email, name=name)
 
 @main_bp.route("/ReportIncidents")
 def reportIncidents():
