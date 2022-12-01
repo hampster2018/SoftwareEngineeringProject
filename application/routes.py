@@ -4,7 +4,7 @@ from flask import render_template, redirect, url_for
 from flask_login import login_required, logout_user, current_user
 
 from .roles import roles_required
-from .db import GetTolls, MakeIssue
+from .db import GetTolls, MakeIssue, GetUserById
 
 main_bp = Blueprint(
     "main_bp", __name__, template_folder="templates", static_folder="static"
@@ -20,7 +20,9 @@ def googleMaps():
 
 @main_bp.route("/AccountPreferences")
 def accPreference():
-    return render_template("accountPreferences.html")
+    user = GetUserById()
+    email = user['email']
+    return render_template("accountPreferences.html", email)
 
 @main_bp.route("/ReportIncidents")
 def reportIncidents():
