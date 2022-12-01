@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask import current_app as app
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
 from flask_login import login_required, logout_user, current_user
 
 from .roles import roles_required
@@ -48,6 +48,26 @@ def accidentMonitor():
 @main_bp.route("/ReportAnIssue")
 def reportIssue():
     return render_template("reportAnIssue.html")
+
+@main_bp.route("/handleIssueSubmission", methods=['POST', 'GET'])
+def handleIssueSubmission():
+    formdata = request.form['issue']
+    MakeIssue([formdata])
+    return redirect(url_for('main_bp.home'))
+    
+
+@main_bp.route("/issueSubmission/<issueNum>")
+def issueSubmission(issueNum):
+    switch={
+        1: 'GPS and Network',
+        2: 'Routes',
+        3: 'Map',
+        4: 'Voice and Sound',
+        5: 'My Account',
+        6: 'Feedback and suggestions'
+    }
+    issue = switch.get(int(issueNum), "nothing")
+    return render_template("issueSubmission.html", issue=issue, issueNum=issueNum)
 
 @main_bp.route("/ContactEmergency")
 def contactEmergency():
