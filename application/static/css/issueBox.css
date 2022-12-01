@@ -1,0 +1,12 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(243, 243, 243);
+}
+
+.box{
+    /*text-align: center;*/
+    height:200px;
+    font-size:14pt
+}
+
+.center{text-align: center;}

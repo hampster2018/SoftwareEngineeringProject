@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Account Preferences</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/accountPreferences.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/issueBox.css') }}">
 </head>
 
 <body>
     <h1 class="center">Submission Form</h1>
     
-    <form class="center">
-        Enter and submit.
+    <form style="font-size: 25px;"class="center" action="{{url_for('main_bp.handleIssueSubmission')}}" method="post" >
+        Issue : {{issue}}.
         <br>
-        <textarea
-        rows="12" cols="55">Enter text here...
-        </textarea><br>
+            <textarea
+            rows="12" cols="40"Enter text here... 
+            class="box" type="text" name="issue">Enter text here...</textarea>
+        <br>
+        
         <input type="submit" value="submit" />
     </form>
 
     <div class="center" style="padding-top: 25px;">
-        <a href="ReportAnIssue">
+        <a href="/ReportAnIssue">
             <input type="submit" value="Return Back"/>
         </a>
     </div>
