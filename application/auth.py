@@ -31,7 +31,7 @@ def signup():
     if form.validate_on_submit():
         existing_user = GetUserByEmail(form.email.data)
         print("Existing Users:", existing_user)
-        if len(existing_user) == 0:
+        if existing_user is None:
             MakeUser({'name': form.name.data, 'email': form.email.data, 'password': generate_password_hash(form.password.data, method="sha256"), 'roles': ["User"]})
             user = GetUserByEmail(form.email.data)
             user = User(_id=user['_id'], name=user['name'], email=user['email'], password=user['password'], roles=user['roles'])
@@ -75,7 +75,6 @@ def login():
 @auth_bp.route("/logout", methods=["GET", "POST"])
 @login_required
 def logout():
-
     logout_user()
     return redirect(url_for("auth_bp.login"))
 
