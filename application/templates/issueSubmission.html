@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Preferences</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accountPreferences.css') }}">
+</head>
+
+<body>
+    <h1 class="center">Submission Form</h1>
+    
+    <form class="center">
+        Enter and submit.
+        <br>
+        <textarea
+        rows="12" cols="55">Enter text here...
+        </textarea><br>
+        <input type="submit" value="submit" />
+    </form>
+
+    <div class="center" style="padding-top: 25px;">
+        <a href="ReportAnIssue">
+            <input type="submit" value="Return Back"/>
+        </a>
+    </div>
+
+</body>

@@ -49,6 +49,10 @@ def accidentMonitor():
 def reportIssue():
     return render_template("reportAnIssue.html")
 
+@main_bp.route("/issueSubmission")
+def issueSubmission():
+    return render_template("issueSubmission.html")
+
 @main_bp.route("/ContactEmergency")
 def contactEmergency():
     return render_template("contactEmergency.html")
