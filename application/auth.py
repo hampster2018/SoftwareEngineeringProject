@@ -2,7 +2,7 @@
 from flask import Blueprint
 from flask import current_app as app
 from flask import flash, redirect, render_template, request, url_for
-from flask_login import current_user, login_user, confirm_login
+from flask_login import current_user, login_user, confirm_login, logout_user, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from . import login_manager, mongo, sesh
@@ -49,11 +49,7 @@ def signup():
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
-    """
-    Log-in page for registered users.
-    GET: Serve Log-in page.
-    POST: Validate form and redirect user to dashboard.
-    """
+
     if current_user.is_authenticated:
         return redirect(url_for("main_bp.home"))  # Bypass if user is logged in
 
@@ -74,6 +70,15 @@ def login():
         template="login-page",
         body="Log in with your User account.",
     )
+
+
+@auth_bp.route("/logout", methods=["GET", "POST"])
+@login_required
+def logout():
+
+    logout_user()
+    return redirect(url_for("auth_bp.login"))
+
 
 
 @login_manager.user_loader

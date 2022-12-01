@@ -14,16 +14,6 @@ main_bp = Blueprint(
 def home():
     return render_template("mainMenu.html")
 
-@main_bp.route("/Login")
-def signIn():
-    return redirect(url_for("auth_bp.login"))
-    
-@main_bp.route("/Logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for("auth_bp.login"))
-
 @main_bp.route("/Map")
 def googleMaps():
     return render_template("map.html")
