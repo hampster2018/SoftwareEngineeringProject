@@ -3,6 +3,7 @@ from flask_login import current_user
 
 from bson import ObjectId
 from . import mongo
+from pymongo import collection
 
 """
     Set of functions to create and get User information
@@ -51,3 +52,45 @@ def GetTolls():
 
 def SetTollByName(name, amount):
     return mongo.db.Tolls.find_one_and_update({'name': name}, {'amount': amount})
+
+"""
+    Set of functions to report incidents 
+"""
+
+ISSUE_TYPES = {
+        'Car Crash': 'CC',
+        'Traffic Jam': 'TJ',
+        'Speed Trap': 'ST',
+        'Construction Zone': 'CZ',
+        'Hazards': 'HZ'
+    }
+
+def GetIssues():
+    collection = mongo.db.get_collection("Issues")
+    Issues = collection.aggregate( { '$sort': { 'date': 1}})
+    return Issues
+
+def GetIssue(issueType, issueNumber):
+    issueName = IssueNameUtil(issueType, issueNumber)
+    return mongo.db.Issues.find_one({'name': issueName})
+
+def GetNextIssueName(issueType):
+    currentNum = mongo.db.NumIssueOfType.find_one({'type': issueType})
+    if currentNum is None:
+        mongo.db.NumIssueOfType.insert_one({'type': issueType, 'number': 1})
+        num = 1
+    else: 
+        num = currentNum['number'] + 1
+    acronym = ISSUE_TYPES.setdefault(issueType, 'Unknown Issue')
+    return (acronym + str(num)), num 
+
+def MakeIssue(issueType, latitude, longitude, description):
+    issueName, currentNumber = GetNextIssueName(issueType=issueType)
+    mongo.db.Issues.insert_one({'name': issueName, 'type': issueType, 'lat': latitude, 'long': longitude, 'description': description})
+    UpdateNextIssueNum(issueType, currentNumber)
+
+def UpdateNextIssueNum(issueType, num):
+    mongo.db.NumIssueOfType.find_one_and_update({'type': issueType}, { '$set': { 'number': num }})
+
+def IssueNameUtil(issueType, num):
+    return ISSUE_TYPES.setdefault(issueType, 'Unknown Type') + str(num)

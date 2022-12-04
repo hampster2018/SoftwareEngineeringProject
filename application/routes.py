@@ -4,7 +4,7 @@ from flask import render_template, redirect, url_for, request
 from flask_login import login_required, logout_user, current_user
 
 from .roles import roles_required
-from .db import GetTolls, MakeIssue, GetUserById
+from .db import *
 
 main_bp = Blueprint(
     "main_bp", __name__, template_folder="templates", static_folder="static"
@@ -88,5 +88,5 @@ def toll_fees():
 
 @main_bp.route("/test")
 def test():
-    MakeIssue(Issue=['Meep'])
+    print("Car Crash number 2 is: " + GetIssue('Car Crash', 2)['name'])
     return render_template("publicTransport.html")
