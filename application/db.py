@@ -27,6 +27,9 @@ def GetRoles():
 def MakeUser(user):
     mongo.db.Users.insert_one(user)
 
+def UpdateUserEmail(email):
+    mongo.db.Users.find_one_and_update({'_id': ObjectId(current_user.get_id())}, { '$set': {'email': email}})
+
 
 """
     Set of functions to get and make issues for users
@@ -62,7 +65,8 @@ ISSUE_TYPES = {
         'Traffic Jam': 'TJ',
         'Speed Trap': 'ST',
         'Construction Zone': 'CZ',
-        'Hazards': 'HZ'
+        'Hazards': 'HZ',
+        'Road Condition': 'RC'
     }
 
 def GetIssues():
