@@ -108,7 +108,7 @@ def IssueNameUtil(issueType, num):
 """
 
 def GetLicensePlate(Plate, State):
-    return mongo.db.Lecense.find_one({'Plate': Plate, 'State': State})
+    return mongo.db.License.find_one({'Plate': Plate, 'State': State})
 
 def MakeLicensePlate(Plate, State, VIN, Model, Make, Year):
     mongo.db.License.insert_one({'Plate': Plate, 'State': State, 'VIN': VIN, 'Model': Model, 'Year': Year})
