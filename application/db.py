@@ -34,17 +34,17 @@ def UpdateUserEmail(email):
 """
     Set of functions to get and make issues for users
 """
-def GetIssues():
-    return mongo.db.Issues.find_one({'_id': ObjectId(current_user.get_id())})
+def GetAppIssues():
+    return mongo.db.AppIssues.find_one({'_id': ObjectId(current_user.get_id())})
 
-def MakeIssue(Issue):
-    user = GetIssues()
+def MakeAppIssue(Issue):
+    user = GetAppIssues()
     if user is not None:
         issues = user['Issues']
         issues.append(Issue)
-        mongo.db.Issues.find_one_and_update({'_id': ObjectId(current_user.get_id())}, { '$set': {'Issues': [issues]}})
+        mongo.db.AppIssues.find_one_and_update({'_id': ObjectId(current_user.get_id())}, { '$set': {'Issues': [issues]}})
     else:
-        mongo.db.Issues.insert_one({'_id': ObjectId(current_user.get_id()), 'Issues': [Issue]})
+        mongo.db.AppIssues.insert_one({'_id': ObjectId(current_user.get_id()), 'Issues': [Issue]})
         
 
 """
@@ -55,6 +55,7 @@ def GetTolls():
 
 def SetTollByName(name, amount):
     return mongo.db.Tolls.find_one_and_update({'name': name}, {'amount': amount})
+
 
 """
     Set of functions to report incidents 
@@ -88,9 +89,12 @@ def GetNextIssueName(issueType):
     acronym = ISSUE_TYPES.setdefault(issueType, 'Unknown Issue')
     return (acronym + str(num)), num 
 
-def MakeIssue(issueType, latitude, longitude, description):
+def MakeIssue(issueType, description, latitude=None, longitude=None):
     issueName, currentNumber = GetNextIssueName(issueType=issueType)
-    mongo.db.Issues.insert_one({'name': issueName, 'type': issueType, 'lat': latitude, 'long': longitude, 'description': description})
+    if latitude is None and longitude is None:
+        mongo.db.Issues.insert_one({'name': issueName, 'type': issueType, 'description': description})
+    else:
+        mongo.db.Issues.insert_one({'name': issueName, 'type': issueType, 'lat': latitude, 'long': longitude, 'description': description})
     UpdateNextIssueNum(issueType, currentNumber)
 
 def UpdateNextIssueNum(issueType, num):
@@ -98,3 +102,13 @@ def UpdateNextIssueNum(issueType, num):
 
 def IssueNameUtil(issueType, num):
     return ISSUE_TYPES.setdefault(issueType, 'Unknown Type') + str(num)
+
+"""
+    License PLate Functions
+"""
+
+def GetLicensePlate(Plate, State):
+    pass
+
+def MakeLicensePlate(Plate, State, VIN, Model, Make, Year):
+    pass

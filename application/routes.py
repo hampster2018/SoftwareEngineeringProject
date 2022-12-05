@@ -45,17 +45,14 @@ def violationMonitor():
 def accidentMonitor():
     return render_template("accidentMonitor.html")
 
+## The report issue page takes in a issue type by selection and renders issue submission
 @main_bp.route("/ReportAnIssue")
 def reportIssue():
-    return render_template("reportAnIssue.html")
+    return render_template("reportAnIssue.html")    
 
-@main_bp.route("/handleIssueSubmission", methods=['POST', 'GET'])
-def handleIssueSubmission():
-    formdata = request.form['issue']
-    MakeIssue([formdata])
-    return redirect(url_for('main_bp.home'))
-    
-
+## Renders issue submission by taking in the issue number given and puts out the 
+## appropriate issue type. Will then take in a description and route to handle
+## Issue Submission to process that data
 @main_bp.route("/issueSubmission/<issueNum>")
 def issueSubmission(issueNum):
     switch={
@@ -68,6 +65,14 @@ def issueSubmission(issueNum):
     }
     issue = switch.get(int(issueNum), "nothing")
     return render_template("issueSubmission.html", issue=issue, issueNum=issueNum)
+
+## Takes in Data Here from the previous form and saves it using MakeIssue DB call
+## Redirects to home page
+@main_bp.route("/handleIssueSubmission", methods=['POST', 'GET'])
+def handleIssueSubmission():
+    formdata = request.form['issue']
+    MakeAppIssue([formdata])
+    return redirect(url_for('main_bp.home'))
 
 @main_bp.route("/ContactEmergency")
 def contactEmergency():
