@@ -13,13 +13,10 @@ main_bp = Blueprint(
 @main_bp.route("/")
 @login_required
 def home():
-    print(current_user.get_id())
-    return render_template("mainMenu.html")
-
-@main_bp.route("/Map")
-@login_required
-def googleMaps():
-    return render_template("map.html")
+    roles = GetRoles()
+    if "Admin" in roles:
+        return render_template("mainMenu.html", Admin=True)
+    return render_template("mainMenu.html", Admin=False)
 
 @main_bp.route("/AccountPreferences")
 @login_required
@@ -106,9 +103,3 @@ def settings():
 def toll_fees():
     tolls = GetTolls()
     return render_template("tollFees.html", tolls=tolls)
-
-@main_bp.route("/test")
-@login_required
-def test():
-    print("Car Crash number 2 is: " + GetIssue('Car Crash', 2)['name'])
-    return render_template("publicTransport.html")

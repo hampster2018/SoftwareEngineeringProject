@@ -16,9 +16,9 @@
     
   <h1 style="font-size:20px" class="center borderexample">EZT Traffic Control</h1>
 
-    
+  
   <div class="grid-container">
-    <a href=Map><div class="grid-item myLink">Map</div></a>
+    {% if Admin %}
     <a href=AccountPreferences><div class="grid-item myLink">Account Preferences</div></a>
     <a href=ReportIncidents><div class="grid-item myLink">Report Incidents</div></a>
     <a href=ReportConditions><div class="grid-item myLink">Report Road Conditions</div></a>
@@ -29,6 +29,21 @@
     <a href=ContactEmergency><div class="grid-item myLink">Contact Emergency Services</div></a>
     <a href=PublicTransport><div class="grid-item myLink">Public Transportation Status</div></a>
     <a href=Settings><div class="grid-item myLink">Settings</div></a>
+
+    {% else %}
+    <a href=AccountPreferences><div class="grid-item myLink">Account Preferences</div></a>
+    <a href=ReportIncidents><div class="grid-item myLink">Report Incidents</div></a>
+    <a href=ReportConditions><div class="grid-item myLink">Report Road Conditions</div></a>
+    <a href=VehicleResearch><div class="grid-item myLink">Research Vehicle by License Plate</div></a>
+    <a href=ViolationMonitor><div class="grid-item myLink">Violation Monitor</div></a>
+    <a href=AccidentMonitor><div class="grid-item myLink">Accidents Monitor</div></a>
+    <a href=ReportAnIssue><div class="grid-item myLink">Report an Issue</div></a>
+    <a href=ContactEmergency><div class="grid-item myLink">Contact Emergency Services</div></a>
+    <a href=PublicTransport><div class="grid-item myLink">Public Transportation Status</div></a>
+    <a href=Settings><div class="grid-item myLink">Settings</div></a>
+
+    {% endif %}
+
   </div>
   
 
