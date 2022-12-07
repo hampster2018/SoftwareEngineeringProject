@@ -49,12 +49,12 @@ def reportIncidents():
     return render_template("reportIncidents.html")
 
 @main_bp.route("/ReportConditions")
-#@login_required
+@login_required
 def reportConditions():
     return render_template("reportConditions.html")
 
 @main_bp.route("/conditionSubmission/<issueNum>")
-#@login_required
+@login_required
 def conditionSubmission(issueNum):
     switch={
         1: 'Heavy Rain',
@@ -67,7 +67,7 @@ def conditionSubmission(issueNum):
     return render_template("conditionSubmission.html", issue=issue, issueNum=issueNum)
 
 @main_bp.route("/handleConditionSubmission/<issue>", methods=['POST', 'GET'])
-#@login_required
+@login_required
 def handleconditionSubmission(issue):
     formdata = request.form
     MakeIssue(issue, formdata['issue'])
@@ -151,7 +151,7 @@ def toll_fees():
     return render_template("tollFees.html", tolls=tolls)
 
 @main_bp.route("/foundLicense/<Plate>/<State>/<VIN>/<Model>/<Make>/<Year>")
-#@login_required
+@login_required
 def found_license(Plate, State, VIN, Model, Make, Year):
     return render_template("FoundLicense.html", Plate=Plate, State=State, VIN=VIN, Model=Model, Make=Make, Year=Year)
 
