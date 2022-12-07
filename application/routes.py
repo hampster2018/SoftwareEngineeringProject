@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask import current_app as app
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 
 from .roles import roles_required
@@ -97,9 +97,33 @@ def handleIssueSubmission():
     MakeAppIssue([formdata])
     return redirect(url_for('main_bp.home'))
 
-@main_bp.route("/ContactEmergency")
+## Issue Sumbission for reporting Incidents
+@main_bp.route("/issueSubmission_incident/<issueNum>")
+@login_required
+def issueSubmission_incident(issueNum):
+    switch={
+        1: 'Car Crash',
+        2: 'Traffic Jam',
+        3: 'Speed Trap',
+        4: 'Construction Zone',
+        5: 'Hazard'
+    }
+    issue = switch.get(int(issueNum), "nothing")
+    return render_template("issueSubmissionIncidents.html", issue=issue, issueNum=issueNum)
+
+@main_bp.route("/handleIssueSubmission_incident/<issue>", methods=['POST', 'GET'])
+@login_required
+def handleIssueSubmission_incident(issue):
+    formdata = request.form
+    print(formdata)
+    MakeIssue(issueType=issue, description=formdata['issue'], latitude=formdata['latitude'], longitude=formdata['longitude'])
+    return redirect(url_for('main_bp.home'))
+
+@main_bp.route("/ContactEmergency", methods=['POST', 'GET'])
 @login_required
 def contactEmergency():
+    if request.method == 'POST':
+        flash("Calling from your phone")
     return render_template("contactEmergency.html")
 
 @main_bp.route("/PublicTransport")

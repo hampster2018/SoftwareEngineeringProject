@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Incident Submission Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/issueBox.css') }}">
+</head>
+
+<body>
+    <h1 class="center">Incident Submission Form</h1>
+    
+    
+    <form style="font-size: 25px;"class="center" action="/handleIssueSubmission_incident/{{issue}}" method="post" >
+        Issue : {{issue}}.
+        <br>
+            
+            <textarea
+            rows="50" cols="40"Enter text here...             
+            class="box" type="text" name="issue" placeholder="Enter the description of the event"></textarea>           
+            <br>
+            <input type="text" name="latitude", placeholder="Latitude"/>
+            <br>
+            <input type="text" name="longitude", placeholder="Longitude"/>
+            
+        <br>
+        
+        <input type="submit" value="submit" />
+    </form>
+
+    <div class="center" style="padding-top: 25px;">
+        <a href="/ReportIncidents">
+            <input type="submit" value="Return Back"/>
+        </a>
+    </div>
+
+</body>

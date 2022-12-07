@@ -8,12 +8,26 @@
     <body>
         <h1 class="center">Contact Emergency Services</h1>
         <p style="font-size:20px" class="borderexample center italic">Contact a service</p>
-        <div>
-            <a href=""><p class="myLink">911</p></a>
-            <a href=""><p class="myLink">Police Department</p></a>
-            <a href=""><p class="myLink">Fire Station</p></a>
-            <a href=""><p class="myLink">First Responders</p></a>
-            <a href=""><p class="myLink">Ambulance</p></a>            
+        <form style="font-size: 25px;"class="center" action="/ContactEmergency" method="post" >
+            <input class="myLink" type="submit" value="911"/>       
+            <br>     
+            <input class="myLink" type="submit" value="Police Department"/>
+            <br>
+            <input class="myLink" type="submit" value="Fire Station"/>
+            <br>
+            <input class="myLink" type="submit" value="First Responders"/>
+            <br>
+            <input class="myLink" type="submit" value="Ambulance"/>          
+        </form>
+
+        {% for message in get_flashed_messages() %}
+        <h2>{{ message }}</h2>
+        {% endfor %}
+
+        <div class="center" style="padding-top: 25px;">
+            <a href="/">
+                <input type="submit" value="Return Back"/>
+            </a>
         </div>
     </body>
 </html>
