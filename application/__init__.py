@@ -4,7 +4,8 @@ from flask_pymongo import PyMongo
 from flask_session import Session
 
 
-mongo = PyMongo()
+mongo = PyMongo(tls=True, tlsAllowInvalidCertificates=True)
+
 login_manager = LoginManager()
 sesh = Session()
 

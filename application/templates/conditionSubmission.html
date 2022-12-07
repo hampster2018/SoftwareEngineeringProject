@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Preferences</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/issueBox.css') }}">
+</head>
+
+<body>
+    <h1 class="center">Submission Form</h1>
+    
+    <form style="font-size: 25px;"class="center" action="/handleConditionSubmission/{{issue}}" method="post" >
+        Issue : {{issue}}.
+        <br>
+            <textarea
+            rows="12" cols="40"Enter text here... 
+            class="box" type="text" name="issue">
+            Enter text here...
+            </textarea>
+        <br>
+        
+        <input type="submit" value="submit" />
+    </form>
+
+    <div class="center" style="padding-top: 25px;">
+        <a href="/ReportConditions">
+            <input type="submit" value="Return Back"/>
+        </a>
+    </div>
+
+</body>

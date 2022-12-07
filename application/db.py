@@ -67,7 +67,12 @@ ISSUE_TYPES = {
         'Speed Trap': 'ST',
         'Construction Zone': 'CZ',
         'Hazards': 'HZ',
-        'Road Condition': 'RC'
+        'Road Condition': 'RC',
+        'Heavy Rain': "HR",
+        'Flash Flood': 'FF',
+        'Strong Winds': 'SW',
+        'Heavy Snow': 'HS',
+        'Icy Roads': 'IR',
     }
 
 def GetIssues():
@@ -104,11 +109,11 @@ def IssueNameUtil(issueType, num):
     return ISSUE_TYPES.setdefault(issueType, 'Unknown Type') + str(num)
 
 """
-    License PLate Functions
+    License Plate Functions
 """
 
 def GetLicensePlate(Plate, State):
     return mongo.db.License.find_one({'Plate': Plate, 'State': State})
 
 def MakeLicensePlate(Plate, State, VIN, Model, Make, Year):
-    mongo.db.License.insert_one({'Plate': Plate, 'State': State, 'VIN': VIN, 'Model': Model, 'Year': Year})
+    mongo.db.License.insert_one({'Plate': Plate, 'State': State, 'VIN': VIN, 'Model': Model, 'Make': Make, 'Year': Year})

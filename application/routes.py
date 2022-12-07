@@ -46,9 +46,29 @@ def reportIncidents():
     return render_template("reportIncidents.html")
 
 @main_bp.route("/ReportConditions")
-@login_required
+#@login_required
 def reportConditions():
     return render_template("reportConditions.html")
+
+@main_bp.route("/conditionSubmission/<issueNum>")
+#@login_required
+def conditionSubmission(issueNum):
+    switch={
+        1: 'Heavy Rain',
+        2: 'Flash Flood',
+        3: 'Strong Winds',
+        4: 'Heavy Snow',
+        5: 'Icy Roads'
+    }
+    issue = switch.get(int(issueNum), "nothing")
+    return render_template("conditionSubmission.html", issue=issue, issueNum=issueNum)
+
+@main_bp.route("/handleConditionSubmission/<issue>", methods=['POST', 'GET'])
+#@login_required
+def handleconditionSubmission(issue):
+    formdata = request.form
+    MakeIssue(issue, formdata['issue'])
+    return redirect(url_for('main_bp.home'))
 
 @main_bp.route("/VehicleResearch")
 @login_required
@@ -117,3 +137,4 @@ def settings():
 def toll_fees():
     tolls = GetTolls()
     return render_template("tollFees.html", tolls=tolls)
+
