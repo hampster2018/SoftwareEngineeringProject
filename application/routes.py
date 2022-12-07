@@ -57,7 +57,7 @@ def handleconditionSubmission():
     return redirect(url_for('main_bp.home'))
 
 @main_bp.route("/VehicleResearch")
-
+@login_required
 def vehicleResearch():
     return render_template("vehicleResearch.html")
 
@@ -123,3 +123,4 @@ def settings():
 def toll_fees():
     tolls = GetTolls()
     return render_template("tollFees.html", tolls=tolls)
+
