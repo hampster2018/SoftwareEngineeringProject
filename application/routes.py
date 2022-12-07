@@ -6,6 +6,9 @@ from flask_login import login_required, current_user
 from .roles import roles_required
 from .db import *
 
+import random
+import string
+
 main_bp = Blueprint(
     "main_bp", __name__, template_folder="templates", static_folder="static"
 )
@@ -70,10 +73,19 @@ def handleconditionSubmission(issue):
     MakeIssue(issue, formdata['issue'])
     return redirect(url_for('main_bp.home'))
 
-@main_bp.route("/VehicleResearch")
+@main_bp.route("/VehicleResearch", methods=['GET', 'POST'])
 @login_required
 def vehicleResearch():
-    return render_template("vehicleResearch.html")
+
+    if request.method == 'POST':
+        print('hi')
+        formdata = request.form
+        car = GetLicensePlate(formdata['license'], formdata['state'])
+        print(car)
+        if car is None:
+            return redirect(url_for('main_bp.no_license'))
+        return redirect(location="/foundLicense/"  + car['Plate'] + "/" + car['State'] + "/" + car['VIN'] + "/" + car['Model'] + "/" + car['Make'] + "/" + str(car['Year']))
+    return render_template("vehicleResearch.html/")
 
 @main_bp.route("/ViolationMonitor")
 @login_required
@@ -138,3 +150,12 @@ def toll_fees():
     tolls = GetTolls()
     return render_template("tollFees.html", tolls=tolls)
 
+@main_bp.route("/foundLicense/<Plate>/<State>/<VIN>/<Model>/<Make>/<Year>")
+#@login_required
+def found_license(Plate, State, VIN, Model, Make, Year):
+    return render_template("FoundLicense.html", Plate=Plate, State=State, VIN=VIN, Model=Model, Make=Make, Year=Year)
+
+@main_bp.route("/noLicense")
+@login_required
+def no_license():
+    return render_template("licenseLink.html")
