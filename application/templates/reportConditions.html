@@ -2,19 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vehicle Research</title>
+    <title>Report Road Conditions</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reportConditions.css') }}">
 </head>
 <body>
+    <h1 class="center">Report Road Conditions</h1>
+    <p style="font-size:20px"class="borderexample center italic">Weather Conditions</p>
 
+    <div>
+        <a href=conditionSubmission/1><p class="myLink">1. Heavy Rain</p></a>
+        <a href=conditionSubmission/2><p class="myLink">2. Flash Flood</p></a>
+        <a href=conditionSubmission/3><p class="myLink">3. Strong Winds</p></a>
+        <a href=conditionSubmission/4><p class="myLink">4. Heavy Snow</p></a>
+        <a href=conditionSubmission/5><p class="myLink">5. Icy Roads</p></a>
+    </div>
 
-    <p><b> Report Road Conditions</b></p1>
-    <p>Weather Conditions</p>
-    <p><a href="/Submitted_Conditions"> 1. Heavy Rain</a></p>
-    <p><a href="/Submitted_Conditions"> 2. Flash Flood</a></p>
-    <p><a href="/Submitted_Conditions"> 3. Strong Winds</a></p>
-    <p><a href="/Submitted_Conditions"> 4. Heavy Snow</a></p>
-    <p><a href="/Submitted_Conditions"> 5. Icy Roads</a></p>
-
+    <div class="center" style="padding-top: 25px;">
+        <a href="/">
+            <input type="submit" value="Main Menu"/>
+        </a>
+    </div>
 
 </body>
