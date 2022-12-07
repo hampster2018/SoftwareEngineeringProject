@@ -32,12 +32,12 @@ def reportIncidents():
     return render_template("reportIncidents.html")
 
 @main_bp.route("/ReportConditions")
-@login_required
+#@login_required
 def reportConditions():
     return render_template("reportConditions.html")
 
 @main_bp.route("/conditionSubmission/<issueNum>")
-@login_required
+#@login_required
 def conditionSubmission(issueNum):
     switch={
         1: 'Heavy Rain',
@@ -49,11 +49,11 @@ def conditionSubmission(issueNum):
     issue = switch.get(int(issueNum), "nothing")
     return render_template("conditionSubmission.html", issue=issue, issueNum=issueNum)
 
-@main_bp.route("/handleconditionSubmission", methods=['POST', 'GET'])
-@login_required
-def handleconditionSubmission():
-    formdata = request.form['issue']
-    MakeIssue([formdata])
+@main_bp.route("/handleConditionSubmission/<issue>", methods=['POST', 'GET'])
+#@login_required
+def handleconditionSubmission(issue):
+    formdata = request.form
+    MakeIssue(issue, formdata['issue'])
     return redirect(url_for('main_bp.home'))
 
 @main_bp.route("/VehicleResearch")

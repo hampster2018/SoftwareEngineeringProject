@@ -9,7 +9,7 @@
 <body>
     <h1 class="center">Submission Form</h1>
     
-    <form style="font-size: 25px;"class="center" action="{{url_for('main_bp.handleconditionSubmission')}}" method="post" >
+    <form style="font-size: 25px;"class="center" action="/handleConditionSubmission/{{issue}}" method="post" >
         Issue : {{issue}}.
         <br>
             <textarea
