@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Preferences</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reportAnIssue.css') }}">
+</head>
+
+<body>
+    <h1 class="center">Update Email</h1>
+
+    <p class="borderexample">Current email: {{email}}</p>
+    
+    <form class="encase" action="{{url_for('main_bp.handleUpdateEmail')}}" method="post">
+        <label for="newEmail">New email:</label><br>
+        <input type="text" id="newEmail" name="newEmail"><br>
+        <input type="submit" value="submit">
+    </form>    
+
+    <div class="center" style="padding-top: 25px;">
+        <a href="/AccountPreferences">
+            <input type="submit" value="Return Back"/>
+        </a>
+    </div>
+
+</body>
