@@ -26,6 +26,20 @@ def accPreference():
     name = user['name']
     return render_template("accountPreferences.html", email=email, name=name)
 
+@main_bp.route("/updateEmail")
+@login_required
+def updateEmail():
+    user = GetUserById()
+    email = user['email']
+    return render_template("updateEmail.html", email=email)
+
+@main_bp.route("/handleUpdateEmail", methods=['POST', 'GET'])
+@login_required
+def handleUpdateEmail():
+    newEmail = request.form['newEmail']
+    UpdateUserEmail(newEmail)
+    return redirect(url_for('main_bp.accPreference'))
+
 @main_bp.route("/ReportIncidents")
 @login_required
 def reportIncidents():

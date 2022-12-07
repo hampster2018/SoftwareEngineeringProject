@@ -14,6 +14,19 @@ body{
     background-color: rgba(255, 255, 255, 0.877);    
 }
 
+.encase{
+    color:black;
+    
+    margin: auto;
+    width: 400px; 
+    padding: 30px;
+
+    border-left: 2px solid rgb(143, 143, 143);
+    border-right: 2px solid rgb(143, 143, 143);
+    border-bottom: 2px solid rgb(143, 143, 143);
+    background-color: rgba(255, 255, 255, 0.877);
+}
+
 .center{text-align: center;}
 .italic{font-style: italic;}
 
